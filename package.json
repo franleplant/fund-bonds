@@ -11,6 +11,10 @@
     "client:install": "cd ./client && yarn",
     "format": "prettier --write \"./src/**.js\" \"./client/src/**.{js,jsx}\""
   },
+
+  "nodemonConfig": {
+    "ignore": ["client/*"]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
