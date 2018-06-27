@@ -2,12 +2,9 @@ import React from "react";
 import moment from "moment";
 import "./App.css";
 import Chart from "./Chart";
+import COLORS from './colors'
 
 
-const COLORS = [
-
-
-]
 async function getData() {
   const res = await fetch("api/data", {
     accept: "application/json"
@@ -35,7 +32,7 @@ function transform(cells) {
     fill: false,
     lineTension: 0.1,
     backgroundColor: "rgba(75,192,192,0.4)",
-    borderColor: "rgba(75,192,192,1)",
+    //borderColor: "rgba(75,192,192,1)",
     borderCapStyle: "butt",
     borderDash: [],
     borderDashOffset: 0.0,
@@ -53,13 +50,15 @@ function transform(cells) {
 
   const dates = [];
   const datasets = {};
-  charRange("B", "T").forEach(colIndex => {
+  charRange("B", "T").forEach((colIndex, index) => {
     const header = cells[`${colIndex}${HEADERS_ROW}`].v;
 
     datasets[colIndex] = {
+      ...DEFAULT_OPTS,
       label: header,
       data: [],
-      ...DEFAULT_OPTS
+      backgroundColor: COLORS[index],
+      pointBorderColor: COLORS[index],
     };
   });
 
