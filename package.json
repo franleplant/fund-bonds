@@ -1,0 +1,32 @@
+{
+  "name": "bonds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently --names \"client,server\" --prefix-colors \"bgBlue.bold,bgMagenta.bold\" \"npm run client:start\" \"npm run server:start\"",
+    "server:start": "nodemon src/index.js",
+    "client:start": "cd ./client && yarn start",
+    "client:install": "cd ./client && yarn",
+    "format": "prettier --write \"./src/**.js\" \"./client/src/**.{js,jsx}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.18.3",
+    "cache": "2.1.0",
+    "cookie-parser": "1.4.3",
+    "express": "4.16.3",
+    "morgan": "1.9.0",
+    "node-fetch": "2.1.2",
+    "serve-favicon": "2.5.0",
+    "xlsx": "0.13.1"
+  },
+  "devDependencies": {
+    "concurrently": "3.6.0",
+    "nodemon": "1.17.5",
+    "prettier": "1.13.6"
+  }
+}
