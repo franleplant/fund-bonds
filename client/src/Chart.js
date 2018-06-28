@@ -10,7 +10,7 @@ export default class Chart extends React.Component {
       <Line
         data={this.props.data}
         options={{
-          cubicInterpolationMode: 'monotone',
+          cubicInterpolationMode: "monotone",
           scales: {
             xAxes: {
               type: "time",
@@ -21,16 +21,16 @@ export default class Chart extends React.Component {
                 tooltipFormat: "YYYY-MM-DD",
 
                 displayFormats: {
-                             'millisecond': 'MMM DD',
-                                        'second': 'MMM DD',
-                                                   'minute': 'MMM DD',
-                                                              'hour': 'MMM DD',
-                                                                         'day': 'MMM DD',
-                                                                                    'week': 'MMM DD',
-                                                                                               'month': 'MMM DD',
-                                                                                                          'quarter': 'MMM DD',
-                                                                                                                     'year': 'MMM DD',
-                                                                                                                             }
+                  millisecond: "MMM DD",
+                  second: "MMM DD",
+                  minute: "MMM DD",
+                  hour: "MMM DD",
+                  day: "MMM DD",
+                  week: "MMM DD",
+                  month: "MMM DD",
+                  quarter: "MMM DD",
+                  year: "MMM DD"
+                }
               }
             }
           },

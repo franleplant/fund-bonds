@@ -2,14 +2,13 @@ import React from "react";
 import moment from "moment";
 import "./App.css";
 import Chart from "./Chart";
-import COLORS from './colors';
-import simplify from 'simplify-js';
+import COLORS from "./colors";
+import simplify from "simplify-js";
 
 //TODOS
 //- improve the structure of the transformations code
 //- add date selectors and filters
 //- line chart selectors
-
 
 async function getData() {
   const res = await fetch("api/data", {
@@ -66,7 +65,7 @@ function transform(cells) {
       data: [],
       backgroundColor: COLORS[index],
       borderColor: COLORS[index],
-      pointBorderColor: COLORS[index],
+      pointBorderColor: COLORS[index]
     };
   });
 
@@ -85,26 +84,24 @@ function transform(cells) {
       const cellValue = (cells[`${colIndex}${rowIndex}`] || {}).v || 0;
       datasets[colIndex].data.push({
         x: date,
-        y: cellValue,
+        y: cellValue
       });
     });
   }
 
-
   // Reduce the amount of numbers
-  Object.values(datasets)
-    .forEach(dataset => {
-      dataset.data = simplify(dataset.data, 0.1).map(point => {
-        return {
-          ...point,
-          x: moment(point.x).toISOString(),
-        }
-      })
-    })
+  Object.values(datasets).forEach(dataset => {
+    dataset.data = simplify(dataset.data, 0.1).map(point => {
+      return {
+        ...point,
+        x: moment(point.x).toISOString()
+      };
+    });
+  });
 
   console.log(dates);
   console.log(datasets);
-  console.log('FUCK')
+  console.log("FUCK");
 
   return {
     labels: dates,
@@ -131,11 +128,11 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.loading) {
-    return (
-      <div className="container">
- <p>Loading ...</p>
-      </div>
-    );
+      return (
+        <div className="container">
+          <p>Loading ...</p>
+        </div>
+      );
     }
 
     return (
