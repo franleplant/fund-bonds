@@ -68,6 +68,9 @@ export function charRange(charA: string, charZ: string): Array<string> {
   return range;
 }
 
+// TODO make this return all the points
+// TODO create another function that reduces the amount of points
+// TODO create another function that maps unix time to the date format we want
 export function transform(cells: ICells): IChartData {
   const dates = [];
   const datasets: IKeyedDatasets = {};
@@ -91,9 +94,9 @@ export function transform(cells: ICells): IChartData {
       break;
     }
 
-    dates.push(moment(dateCell.w, "D-MMM-YY").format("YYYY-MM-DD"));
-
-    const date = moment(dateCell.w, "D-MMM-YY").valueOf();
+    const parsedDate = moment(dateCell.w, "D-MMM-YY")
+    dates.push(parsedDate.format("YYYY-MM-DD"));
+    const date = parsedDate.valueOf();
 
     charRange("B", "T").forEach(colIndex => {
       const cellValue = (cells[`${colIndex}${rowIndex}`] || {}).v || 0;
