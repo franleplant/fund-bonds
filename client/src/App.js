@@ -30,7 +30,7 @@ function charRange(charA, charZ) {
   return a;
 }
 
-//TODO move this else where and reduce amount of points
+//TODO move this else where
 function transform(cells) {
   const DATA_START_ROW = 8;
   const HEADERS_ROW = 7;
@@ -75,12 +75,11 @@ function transform(cells) {
       break;
     }
 
-    dates.push(moment(dateCell.w, "D-MMM-YY").toISOString());
+    dates.push(moment(dateCell.w, "D-MMM-YY").format("YYYY-MM-DD"));
 
     const date = moment(dateCell.w, "D-MMM-YY").valueOf();
 
     charRange("B", "T").forEach(colIndex => {
-      // TODO we might need data transformations in here
       const cellValue = (cells[`${colIndex}${rowIndex}`] || {}).v || 0;
       datasets[colIndex].data.push({
         x: date,
@@ -94,7 +93,7 @@ function transform(cells) {
     dataset.data = simplify(dataset.data, 0.1).map(point => {
       return {
         ...point,
-        x: moment(point.x).toISOString()
+        x: moment(point.x).format("YYYY-MM-DD")
       };
     });
   });

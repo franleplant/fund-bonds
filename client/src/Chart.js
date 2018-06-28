@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Line } from "react-chartjs-2";
 
 //use decimation to reduce the amount of points
@@ -11,27 +12,18 @@ export default class Chart extends React.Component {
         data={this.props.data}
         options={{
           cubicInterpolationMode: "monotone",
+          tooltips: {
+            callbacks: {
+              title(tooltipItem, data) {
+                const { xLabel } = tooltipItem;
+                return moment(xLabel).format("YYYY-MM-DD");
+              }
+            }
+          },
           scales: {
             xAxes: {
               type: "time",
-              //: data are spread at the same distance from each other
-              distribution: "series",
-              //TODO this does not work
-              time: {
-                tooltipFormat: "YYYY-MM-DD",
-
-                displayFormats: {
-                  millisecond: "MMM DD",
-                  second: "MMM DD",
-                  minute: "MMM DD",
-                  hour: "MMM DD",
-                  day: "MMM DD",
-                  week: "MMM DD",
-                  month: "MMM DD",
-                  quarter: "MMM DD",
-                  year: "MMM DD"
-                }
-              }
+              distribution: "series"
             }
           },
           animation: {
@@ -40,13 +32,7 @@ export default class Chart extends React.Component {
           hover: {
             animationDuration: 0 // duration of animations when hovering an item
           },
-          responsiveAnimationDuration: 0, // animation duration after a resize
-          //showLines: false,
-          elements: {
-            line: {
-              //tension: 0 // disables bezier curves
-            }
-          }
+          responsiveAnimationDuration: 0 // animation duration after a resize
         }}
       />
     );
