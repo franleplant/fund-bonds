@@ -76,8 +76,9 @@ function transform(cells) {
       break;
     }
 
+    dates.push(moment(dateCell.w, "D-MMM-YY").toISOString());
+
     const date = moment(dateCell.w, "D-MMM-YY").valueOf();
-    dates.push(date);
 
     charRange("B", "T").forEach(colIndex => {
       // TODO we might need data transformations in here
@@ -93,7 +94,12 @@ function transform(cells) {
   // Reduce the amount of numbers
   Object.values(datasets)
     .forEach(dataset => {
-      dataset.data = simplify(dataset.data, 0.1)
+      dataset.data = simplify(dataset.data, 0.1).map(point => {
+        return {
+          ...point,
+          x: moment(point.x).toISOString(),
+        }
+      })
     })
 
   console.log(dates);

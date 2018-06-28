@@ -14,9 +14,23 @@ export default class Chart extends React.Component {
           scales: {
             xAxes: {
               type: "time",
+              //: data are spread at the same distance from each other
               distribution: "series",
+              //TODO this does not work
               time: {
-                tooltipFormat: "YYYY-MM-DD"
+                tooltipFormat: "YYYY-MM-DD",
+
+                displayFormats: {
+                             'millisecond': 'MMM DD',
+                                        'second': 'MMM DD',
+                                                   'minute': 'MMM DD',
+                                                              'hour': 'MMM DD',
+                                                                         'day': 'MMM DD',
+                                                                                    'week': 'MMM DD',
+                                                                                               'month': 'MMM DD',
+                                                                                                          'quarter': 'MMM DD',
+                                                                                                                     'year': 'MMM DD',
+                                                                                                                             }
               }
             }
           },
