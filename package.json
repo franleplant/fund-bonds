@@ -10,8 +10,10 @@
     "client:start": "cd ./client && yarn start",
     "client:install": "cd ./client && yarn",
     "client:build": "cd ./client && yarn run build",
+    "client:flow": "cd ./client && npm run flow",
     "start:prod": "npm run client:install && npm run client:build && npm run server:start",
-    "format": "prettier --write \"./src/**.js\" \"./client/src/**.{js,jsx}\""
+    "format": "prettier --write \"./src/**.js\" \"./client/src/**.{js,jsx}\"",
+    "flow": "npm run client:flow"
   },
 
   "nodemonConfig": {
