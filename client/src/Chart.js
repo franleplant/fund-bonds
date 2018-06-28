@@ -1,8 +1,9 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-//TODO use decimation to reduce the amount of points
+//use decimation to reduce the amount of points
 //this lib might work http://mourner.github.io/simplify-js/
+// Docs for charts http://www.chartjs.org/docs/latest/charts/line.html
 export default class Chart extends React.Component {
   render() {
     return (
@@ -26,10 +27,10 @@ export default class Chart extends React.Component {
             animationDuration: 0 // duration of animations when hovering an item
           },
           responsiveAnimationDuration: 0, // animation duration after a resize
-          showLines: false,
+          //showLines: false,
           elements: {
             line: {
-              tension: 0 // disables bezier curves
+              //tension: 0 // disables bezier curves
             }
           }
         }}

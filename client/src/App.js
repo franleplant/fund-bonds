@@ -2,7 +2,13 @@ import React from "react";
 import moment from "moment";
 import "./App.css";
 import Chart from "./Chart";
-import COLORS from './colors'
+import COLORS from './colors';
+import simplify from 'simplify-js';
+
+//TODOS
+//- improve the structure of the transformations code
+//- add date selectors and filters
+//- line chart selectors
 
 
 async function getData() {
@@ -25,6 +31,7 @@ function charRange(charA, charZ) {
   return a;
 }
 
+//TODO move this else where and reduce amount of points
 function transform(cells) {
   const DATA_START_ROW = 8;
   const HEADERS_ROW = 7;
@@ -58,6 +65,7 @@ function transform(cells) {
       label: header,
       data: [],
       backgroundColor: COLORS[index],
+      borderColor: COLORS[index],
       pointBorderColor: COLORS[index],
     };
   });
@@ -68,12 +76,12 @@ function transform(cells) {
       break;
     }
 
-    const date = moment(dateCell.w, "D-MMM-YY").toISOString();
+    const date = moment(dateCell.w, "D-MMM-YY").valueOf();
     dates.push(date);
 
     charRange("B", "T").forEach(colIndex => {
       // TODO we might need data transformations in here
-      const cellValue = (cells[`${colIndex}${rowIndex}`] || {}).v || undefined;
+      const cellValue = (cells[`${colIndex}${rowIndex}`] || {}).v || 0;
       datasets[colIndex].data.push({
         x: date,
         y: cellValue,
@@ -81,8 +89,16 @@ function transform(cells) {
     });
   }
 
+
+  // Reduce the amount of numbers
+  Object.values(datasets)
+    .forEach(dataset => {
+      dataset.data = simplify(dataset.data, 0.1)
+    })
+
   console.log(dates);
   console.log(datasets);
+  console.log('FUCK')
 
   return {
     labels: dates,
@@ -109,14 +125,15 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <p>Loading ...</p>;
+    return (
+      <div className="container">
+ <p>Loading ...</p>
+      </div>
+    );
     }
 
-    //const generateColor = () => '#'+Math.floor(Math.random()*16777215).toString(16);
-    //const colors = headers.map(generateColor)
-
     return (
-      <div>
+      <div className="container">
         <Chart data={this.state.data} />
       </div>
     );
